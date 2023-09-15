@@ -11,6 +11,7 @@ const ROOM_NOT_FOUND = 1;
 const USER_FULL = 2;
 const ENTER_YOUR_NAME = 3;
 const LETS_CHAT = 4;
+const TIME_EXPIRED = 5;
 
 let socket;
 
@@ -66,6 +67,10 @@ function ChatRoom() {
       setUsers(users);
     });
 
+    socket.on("timeExpired", (users) => {
+      setStatus(TIME_EXPIRED);
+    });
+
     socket.on("msg", (message) => {
       setHistory((history) => [...history, message]);
     });
@@ -90,6 +95,11 @@ function ChatRoom() {
       {status === USER_FULL && (
         <div className="alert alert-danger" role="alert">
           USER FULL
+        </div>
+      )}
+      {status === TIME_EXPIRED && (
+        <div className="alert alert-danger" role="alert">
+          Time Expired
         </div>
       )}
       {status === ENTER_YOUR_NAME && (
