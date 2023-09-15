@@ -5,6 +5,7 @@ import App from "./App";
 import ChatRoom from "./pages/ChatRoom";
 import CreateRoom from "./pages/CreateRoom";
 import AllOpenedChats from "./pages/AllOpenedChats";
+import ClosedChats from "./pages/ClosedChats";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
   {
     path: "/allopenedchats",
     element: <AllOpenedChats />,
+  },
+  {
+    path: "/closedchats",
+    element: <ClosedChats />,
   },
   {
     path: "/create-link",
