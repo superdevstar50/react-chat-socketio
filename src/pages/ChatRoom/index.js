@@ -5,7 +5,7 @@ import cn from "classnames";
 import { io } from "socket.io-client";
 import { Button } from "react-bootstrap";
 
-import config from "../config";
+import config from "../../config";
 
 const ROOM_NOT_FOUND = 1;
 const USER_FULL = 2;
@@ -81,23 +81,23 @@ function ChatRoom() {
   }, [history]);
 
   return (
-    <div class="container p-3">
+    <div className="container p-3">
       {status === ROOM_NOT_FOUND && (
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           Room Not Found
         </div>
       )}
       {status === USER_FULL && (
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           USER FULL
         </div>
       )}
       {status === ENTER_YOUR_NAME && (
         <div>
-          <div class="form-group p-2">
+          <div className="form-group p-2">
             <label for="exampleInputEmail1">Enter Your Name</label>
             <input
-              class="form-control"
+              className="form-control"
               type="text"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
@@ -107,47 +107,50 @@ function ChatRoom() {
         </div>
       )}
       {status === LETS_CHAT && (
-        <div class="row clearfix" style={{ height: "100%" }}>
-          <div class="col-lg-12" style={{ height: "100%" }}>
+        <div className="row clearfix" style={{ height: "100%" }}>
+          <div className="col-lg-12" style={{ height: "100%" }}>
             <div
-              class="card chat-app"
+              className="card chat-app"
               style={{ width: "400px", height: "500px" }}
             >
-              {/* <div id="plist" class="people-list" style={{ height: "100%" }}>
-                <ul class="list-unstyled chat-list mt-2 mb-0">
+              {/* <div id="plist" className="people-list" style={{ height: "100%" }}>
+                <ul className="list-unstyled chat-list mt-2 mb-0">
                   {users.map((user, index) => (
-                    <li class="clearfix" key={index}>
+                    <li className="clearfix" key={index}>
                       <img
                         src={`https://bootdey.com/img/Content/avatar/avatar${index +
                           1}.png`}
                         alt="avatar"
                       />
-                      <div class="about">
-                        <div class="name">{user}</div>
+                      <div className="about">
+                        <div className="name">{user}</div>
                       </div>
                     </li>
                   ))}
                 </ul>
               </div> */}
-              <div class="chat d-flex flex-column" style={{ height: "100%" }}>
+              <div
+                className="chat d-flex flex-column"
+                style={{ height: "100%" }}
+              >
                 <div
-                  class="chat-history"
+                  className="chat-history"
                   style={{ height: "100%", overflowY: "auto" }}
                   ref={historyRef}
                 >
-                  <ul class="m-b-0">
+                  <ul className="m-b-0">
                     {history.map((item, index) => (
-                      <li class="clearfix" key={index}>
+                      <li className="clearfix" key={index}>
                         <div
-                          class={cn([
+                          className={cn([
                             "message-data",
                             { "text-right": item.userId === userName },
                           ])}
                         >
-                          {/* <span class="message-data-time">{item.time}</span> */}
+                          {/* <span className="message-data-time">{item.time}</span> */}
                         </div>
                         <div
-                          class={cn([
+                          className={cn([
                             "message",
                             {
                               "float-right my-message":
@@ -162,11 +165,11 @@ function ChatRoom() {
                     ))}
                   </ul>
                 </div>
-                <div class="chat-message clearfix">
-                  <div class="input-group mb-0">
+                <div className="chat-message clearfix">
+                  <div className="input-group mb-0">
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       placeholder="Enter text here..."
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}

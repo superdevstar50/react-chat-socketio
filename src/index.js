@@ -1,27 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import ChatRoom from "./chatRoom";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <div>Hello world!</div>,
-  },
-  {
-    path: "/create-link",
-    element: <App />,
-  },
-  {
-    path: "/room/:id",
-    element: <ChatRoom />,
-  },
-]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
