@@ -5,6 +5,8 @@ import cn from "classnames";
 import { io } from "socket.io-client";
 import { Button } from "react-bootstrap";
 
+import config from "../config";
+
 const ROOM_NOT_FOUND = 1;
 const USER_FULL = 2;
 const ENTER_YOUR_NAME = 3;
@@ -38,7 +40,7 @@ function ChatRoom() {
   };
 
   useEffect(() => {
-    socket = io("http://18.191.212.236:5001/", {
+    socket = io(config.base_url, {
       query: {
         roomId,
       },
