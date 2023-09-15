@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useReducer, useState } from "react";
+
+import { Collapse } from "react-bootstrap";
 
 function RoomInfo({ info }) {
+  const [toggle, setToggle] = useReducer((prev) => 1 - prev, 0);
+
   return (
     <div className="card">
       <div className="card-body">
         <h5 className="card-title">Name : {info.name}</h5>
         <h6 className="card-subtitle mb-2 text-muted border-bottom">
-          Link : <button className="btn btn-link">{info.id}</button>
+          Link :{" "}
+          <button className="btn btn-link" onClick={setToggle}>
+            {info.id}
+          </button>
           {info.time && (
             <>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Time Left :{" "}
@@ -14,16 +21,20 @@ function RoomInfo({ info }) {
             </>
           )}
         </h6>
-        <p
-          className="card-text overflow-y-scroll"
-          style={{ maxHeight: "300px" }}
-        >
-          {info.history.map((item) => (
-            <p>
-              {item.userId} : {item.msg}
-            </p>
-          ))}
-        </p>
+        <Collapse in={toggle}>
+          <p
+            className="card-text overflow-y-scroll"
+            style={{ maxHeight: "300px" }}
+          >
+            {info.history.length > 0
+              ? info.history.map((item, index) => (
+                  <p key={index}>
+                    {item.userId} : {item.msg}
+                  </p>
+                ))
+              : "No Chat History"}
+          </p>
+        </Collapse>
       </div>
     </div>
   );

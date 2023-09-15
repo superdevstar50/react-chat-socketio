@@ -28,7 +28,7 @@ function ClosedChats() {
         Total chats closed {roomList.length}
       </div>
       {roomList.map((room) => (
-        <RoomInfo info={room}></RoomInfo>
+        <RoomInfo key={room.id} info={room}></RoomInfo>
       ))}
     </div>
   );
