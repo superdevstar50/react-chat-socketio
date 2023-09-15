@@ -30,7 +30,7 @@ body {
 }
 
 .chat-app .chat {
-  margin-left: 280px;
+  /* margin-left: 280px; */
   border-left: 1px solid #eaeaea;
 }
 

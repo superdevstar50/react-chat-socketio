@@ -111,9 +111,9 @@ function ChatRoom() {
           <div class="col-lg-12" style={{ height: "100%" }}>
             <div
               class="card chat-app"
-              style={{ minHeight: "300px", height: "100%" }}
+              style={{ width: "400px", height: "500px" }}
             >
-              <div id="plist" class="people-list" style={{ height: "100%" }}>
+              {/* <div id="plist" class="people-list" style={{ height: "100%" }}>
                 <ul class="list-unstyled chat-list mt-2 mb-0">
                   {users.map((user, index) => (
                     <li class="clearfix" key={index}>
@@ -128,7 +128,7 @@ function ChatRoom() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
               <div class="chat d-flex flex-column" style={{ height: "100%" }}>
                 <div
                   class="chat-history"
