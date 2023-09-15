@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import cn from "classnames";
 
@@ -24,7 +24,7 @@ function ChatRoom() {
   const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
   const [history, setHistory] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [, setUsers] = useState([]);
 
   const submitMessage = () => {
     if (message === "") return;

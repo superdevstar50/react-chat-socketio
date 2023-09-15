@@ -38,7 +38,11 @@ function RoomList() {
             <tr key={index}>
               <th scope="row">{index + 1}</th>
               <td>
-                <a href={`/room/${room.id}`} target="_blank">
+                <a
+                  href={`/room/${room.id}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
                   {room.id}
                 </a>
               </td>

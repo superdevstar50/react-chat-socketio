@@ -68,7 +68,7 @@ function CreateCard() {
         </div>
       </div>
       <div className="d-flex justify-content-center p-2">
-        <a href={`/room/${roomId}`} target="_blank">
+        <a href={`/room/${roomId}`} rel="noopener noreferrer" target="_blank">
           {roomId}
         </a>
       </div>
