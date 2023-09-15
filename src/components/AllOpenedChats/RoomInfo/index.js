@@ -3,7 +3,7 @@ import React, { useReducer, useState } from "react";
 import { Collapse } from "react-bootstrap";
 
 function RoomInfo({ info }) {
-  const [toggle, setToggle] = useReducer((prev) => 1 - prev, 0);
+  const [toggle, setToggle] = useReducer((prev) => !prev, false);
 
   return (
     <div className="card">
