@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
-
 import { Collapse } from "react-bootstrap";
+
+import config from "../../../config";
 
 function RoomInfo({ info }) {
   const [toggle, setToggle] = useReducer((prev) => !prev, false);
@@ -29,7 +30,18 @@ function RoomInfo({ info }) {
             {info.history.length > 0
               ? info.history.map((item, index) => (
                   <p key={index}>
-                    {item.userId} : {item.msg}
+                    {item.userId} :
+                    {item.type ? (
+                      <a
+                        href={`${config.base_url}/uploads/${item.filename}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {item.filename}
+                      </a>
+                    ) : (
+                      item.msg
+                    )}
                   </p>
                 ))
               : "No Chat History"}

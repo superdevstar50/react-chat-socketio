@@ -26,6 +26,8 @@ function ChatRoom() {
   const [history, setHistory] = useState([]);
   const [, setUsers] = useState([]);
 
+  const fileRef = useRef(null);
+
   const submitMessage = () => {
     if (message === "") return;
 
@@ -38,6 +40,27 @@ function ChatRoom() {
     if (userName === "") return;
 
     socket.emit("setName", userName);
+  };
+
+  const handleSendFile = () => {
+    fileRef.current.click();
+  };
+
+  const handleFileChange = async () => {
+    const formData = new FormData();
+
+    const file = fileRef.current.files[0];
+
+    formData.append("file", file);
+
+    const result = await fetch(`${config.base_url}/upload-file`, {
+      method: "POST",
+      body: formData,
+    });
+    const data = await result.json();
+    socket.emit("sendFile", data.filename);
+
+    fileRef.current.value = "";
   };
 
   useEffect(() => {
@@ -105,7 +128,7 @@ function ChatRoom() {
       {status === ENTER_YOUR_NAME && (
         <div>
           <div className="form-group p-2">
-            <label for="exampleInputEmail1">Enter Your Name</label>
+            <label>Enter Your Name</label>
             <input
               className="form-control"
               type="text"
@@ -169,7 +192,17 @@ function ChatRoom() {
                             },
                           ])}
                         >
-                          {item.msg}
+                          {item.type ? (
+                            <a
+                              href={`${config.base_url}/uploads/${item.filename}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {item.filename}
+                            </a>
+                          ) : (
+                            item.msg
+                          )}
                         </div>
                       </li>
                     ))}
@@ -189,6 +222,21 @@ function ChatRoom() {
                         }
                       }}
                     />
+                    <input
+                      id="file"
+                      name="file"
+                      type="file"
+                      ref={fileRef}
+                      onChange={handleFileChange}
+                      hidden
+                    />
+
+                    <button
+                      className="btn btn-primary"
+                      onClick={handleSendFile}
+                    >
+                      Attach
+                    </button>
                   </div>
                 </div>
               </div>
