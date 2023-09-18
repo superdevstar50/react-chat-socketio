@@ -7,6 +7,8 @@ import { Button } from "react-bootstrap";
 
 import config from "../../config";
 
+import "./index.css";
+
 const ROOM_NOT_FOUND = 1;
 const USER_FULL = 2;
 const ENTER_YOUR_NAME = 3;
@@ -25,6 +27,7 @@ function ChatRoom() {
   const [message, setMessage] = useState("");
   const [history, setHistory] = useState([]);
   const [, setUsers] = useState([]);
+  const [typing, setTyping] = useState(false);
 
   const fileRef = useRef(null);
 
@@ -63,6 +66,18 @@ function ChatRoom() {
     fileRef.current.value = "";
   };
 
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setMessage(value);
+
+    if (value !== "" && message === "") {
+      socket.emit("typing", "start");
+    }
+    if (value === "" && message != "") {
+      socket.emit("typing", "end");
+    }
+  };
+
   useEffect(() => {
     socket = io(config.base_url, {
       query: {
@@ -96,6 +111,10 @@ function ChatRoom() {
 
     socket.on("msg", (message) => {
       setHistory((history) => [...history, message]);
+    });
+
+    socket.on("typing", (type) => {
+      setTyping(type === "start");
     });
 
     return () => {
@@ -206,6 +225,18 @@ function ChatRoom() {
                         </div>
                       </li>
                     ))}
+                    {typing && (
+                      <li className="clearfix">
+                        <div className="message-data"></div>
+                        <div className="message other-message">
+                          <div class="typing">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                          </div>
+                        </div>
+                      </li>
+                    )}
                   </ul>
                 </div>
                 <div className="chat-message clearfix">
@@ -215,7 +246,7 @@ function ChatRoom() {
                       className="form-control"
                       placeholder="Enter text here..."
                       value={message}
-                      onChange={(e) => setMessage(e.target.value)}
+                      onChange={handleInputChange}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
                           submitMessage();

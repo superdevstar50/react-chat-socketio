@@ -149,7 +149,7 @@ body {
   pointer-events: none;
   border-bottom-color: #fff;
   border-width: 10px;
-  margin-left: -10px;
+  margin-left: -20px;
 }
 
 .chat .chat-history .my-message {
