@@ -73,7 +73,7 @@ function ChatRoom() {
     if (value !== "" && message === "") {
       socket.emit("typing", "start");
     }
-    if (value === "" && message != "") {
+    if (value === "" && message !== "") {
       socket.emit("typing", "end");
     }
   };
